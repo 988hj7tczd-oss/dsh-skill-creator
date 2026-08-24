@@ -1,0 +1,18 @@
+# dsh-skill-creator bundle layer.
+#
+# The row name resolves to this package itself (self-reference via the
+# "exports" field in package.json), so the profile does not need to know the
+# absolute source path. Node resolution follows the bundle install location.
+#
+# Available config (all optional):
+#   outputDir:            string   skill output root; default $DSH_HOME/skills
+#                                    or the first entry of customSkillDirs
+#   customSkillDirs:      string[] additional roots scanned by the runtime
+#                                    provider and used for the default outputDir
+#   mountRuntimeProvider: boolean  register the outputDir as a runtime skill
+#                                    source on ctx.skills (default true)
+- insert:
+    - id: skill-creator
+      name: 'dsh-skill-creator'
+      config:
+        mountRuntimeProvider: true

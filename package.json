@@ -1,0 +1,54 @@
+{
+  "name": "dsh-skill-creator",
+  "version": "0.1.0",
+  "description": "One-shot DSH skill (SKILL.md) generator: capture intent, draft, validate, package and distribute skills from inside a DeepSeek Harness session.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "README.md",
+    "cordis.yml",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node tests/smoke.e2e.ts",
+    "validate:py": "python3 scripts/quick_validate.py",
+    "pack:py": "python3 scripts/package_skill.py"
+  },
+  "dependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "0.1.1-rc.2",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "typescript": "^5.5.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.yml"
+    }
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "skill",
+    "skill-creator",
+    "cordis",
+    "plugin"
+  ]
+}
