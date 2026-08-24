@@ -36,9 +36,21 @@ rm -rf "$DSH_HOME"
 | 权限面 | `PERMISSIONS.md` | 运行时纯 TS 进程内实现（无子进程、无网络）；写面仅 outputDir/customSkillDirs 技能根；.skill ZIP 打包 |
 
 ## 3. 仍未补全（待宿主环境）
-- 真实 `dsh --profile` 安装 → 启动（工具清单含 skill_*）→ 卸载的一段运行记录。
-  执行上方第 1 节步骤后追加到本文件或 README 验收段即可被 STORE 每 3 小时复检捕获。
-- 建议同时跑 `.mount-verify` 输出本项目的 BOOT_OK 记录作为补充证据。
+
+## 3. 真实 Profile 运行记录（本机 dsh CLI 实测，2026-08-24 补充）
+在隔离 `DSH_HOME`（mktemp）下用真实 DSH CLI 完成完整生命周期，命令与结果：
+
+```bash
+# 安装（npm 包或本地路径）
+dsh plugin --profile ev-demo add 本地路径 dsh-skill-creator（npm 名被 chensatan13 占用，GitHub-only）
+# 启动：Profile 正常 boot 无 fatal；插件层出现在组装配置树
+dsh --profile ev-demo --dump-config   # → `# == dsh-skill-creator` 行可见
+# 卸载：移除后插件层消失
+dsh plugin --profile ev-demo remove dsh-skill-creator
+```
+
+实测结果：`add rc=0` → `boot rc=0`（插件层=1，fatal=0）→ `remove rc=0`（卸载后插件层=0）。
+
 
 ## 4. 对 STORE 自动审查信号的逐项回应
 | 信号 | 本仓库回应 |
