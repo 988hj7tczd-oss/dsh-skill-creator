@@ -178,3 +178,9 @@ TS 侧校验器 `src/lib/frontmatter.ts` 实现的是**文档化 YAML 子集**�
 | 迭代闭环（草稿→测试→评估→重写） | 由使用方（会话中的模型）通过 4 个工具编排复现 |
 
 `src/lib/zip.ts`、`src/lib/frontmatter.ts`、`src/lib/fs-adapter.ts`、`src/lib/provider.ts` 为本项目新增实现（无上游对应源码）。
+
+## 权限、失败边界与 DSH STORE 状态
+
+- [PERMISSIONS.md](./PERMISSIONS.md)：运行时读取面 / 命令面（固定 argv，非 shell）/ 写面 / 外部服务 / 失败边界 / 供应链 / 文件权限信号（无 chmod/chown、644、无 setuid/setgid）。
+- [docs/store-evidence.md](./docs/store-evidence.md)：一次性 Profile 安装 → 启动（工具注册清单）→ 卸载步骤、本地离线证据、待宿主补录真实运行记录说明，并逐项回应 DSH STORE 五类审查信号（仓库 canonical 匹配 / Node 声明 / 供应链 / 文件权限 / 命令权限）。
+- STORE 复检由 dsh-safe-plugin-manager 每 3 小时自动执行；本仓库已按清单契约声明（package.json 的 `repository` / `engines.node` / `dsh.compatibility` / `dsh.permissions`）。

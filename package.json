@@ -16,7 +16,8 @@
     "scripts",
     "README.md",
     "cordis.yml",
-    "LICENSE"
+    "LICENSE",
+    "docs/store-evidence.md"
   ],
   "license": "MIT",
   "scripts": {
@@ -38,10 +39,35 @@
   "dsh": {
     "bundle": {
       "patch": "./cordis.yml"
+    },
+    "compatibility": {
+      "node": ">=22.18.0",
+      "dsh": ">=0.1.0"
+    },
+    "permissions": {
+      "summary": "在 DSH 会话内从提示/文档/流程描述生成 SKILL.md（draft/validate/package/improve_description 四个工具）。技能写入 $DSH_HOME/skills 或 customSkillDirs；打包 .skill 为本地 ZIP。无网络、无凭据、无外部服务。",
+      "commands": [
+        "node <pkg>/dist/lib/package-skill.js (zip via node archiver-equivalent, fixed argv; non-shell)",
+        "python3 <pkg>/scripts/quick_validate.py (optional local dev helper, non-shell)"
+      ],
+      "writePaths": [
+        "$DSH_HOME/skills/",
+        "customSkillDirs[0]",
+        "outputDir"
+      ],
+      "externalServices": [],
+      "failureBoundaries": [
+        "validation failure refuses packaging",
+        "structured errors"
+      ],
+      "lifecycleEvidence": [
+        "smoke 45 assertions offline",
+        "entry lib/index.js import OK"
+      ]
     }
   },
   "engines": {
-    "node": ">=22.6.0"
+    "node": ">=22.18.0"
   },
   "keywords": [
     "dsh",
@@ -50,5 +76,9 @@
     "skill-creator",
     "cordis",
     "plugin"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/988hj7tczd-oss/dsh-skill-creator.git"
+  }
 }
